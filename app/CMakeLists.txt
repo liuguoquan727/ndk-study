@@ -2,7 +2,7 @@
 # documentation: https://d.android.com/studio/projects/add-native-code.html
 
 # Sets the minimum version of CMake required to build the native library.
-
+# 设置cmake最小版本
 cmake_minimum_required(VERSION 3.4.1)
 
 # Creates and names a library, sets it as either STATIC
@@ -10,14 +10,25 @@ cmake_minimum_required(VERSION 3.4.1)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+# 设置cpp目录路径
+set(CPP_DIR ${CMAKE_SOURCE_DIR}/src/main/jni)
+
+# 设置jniLibs目录路径
+set(LIBS_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs)
+
+# 编译library
 add_library( # Sets the name of the library.
+             # 设置library名称
              native-lib
 
              # Sets the library as a shared library.
+             # 设置library模式
+             # SHARED模式会编译so文件，STATIC模式不会编译
              SHARED
 
              # Provides a relative path to your source file(s).
-             src/main/cpp/native-lib.cpp )
+             # 设置原生代码路径
+             ${CPP_DIR}/native-lib.cpp )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -25,20 +36,27 @@ add_library( # Sets the name of the library.
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
+# 定位library
 find_library( # Sets the name of the path variable.
+              # # library名称
               log-lib
 
               # Specifies the name of the NDK library that
               # you want CMake to locate.
+              # 将library路径存储为一个变量，可以在其他地方用这个变量引用NDK库
+              # 在这里设置变量名称
               log )
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
+# 关联library
 target_link_libraries( # Specifies the target library.
+                       # # 关联的library
                        native-lib
 
                        # Links the target library to the log library
                        # included in the NDK.
+                       # 关联native-lib和log-lib
                        ${log-lib} )
