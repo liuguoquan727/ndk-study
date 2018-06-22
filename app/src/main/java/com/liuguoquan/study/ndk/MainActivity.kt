@@ -1,8 +1,9 @@
 package com.liuguoquan.study.ndk
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v7.app.AppCompatActivity
+import com.liuguoquan.study.ndk.R.id.sample_text
+import kotlinx.android.synthetic.main.activity_main.sample_text
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +26,12 @@ class MainActivity : AppCompatActivity() {
     // Used to load the 'native-lib' library on application startup.
     init {
       System.loadLibrary("native-lib")
+      System.loadLibrary("avcodec-57")
+      System.loadLibrary("avfilter-6")
+      System.loadLibrary("avformat-57")
+      System.loadLibrary("avutil-55")
+      System.loadLibrary("swresample-2")
+      System.loadLibrary("swscale-4")
     }
   }
 }
